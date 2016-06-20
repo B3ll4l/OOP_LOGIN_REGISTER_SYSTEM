@@ -21,6 +21,7 @@ class DB{
 		}
 		return self::$_instance;
 	}
+
 	public function query($sql, $params){
 		if ($this->_query = $this->_pdo->prepare($sql)) {
 			if (count($params)) {
@@ -81,13 +82,15 @@ class DB{
 				}
 				$x++;
 			}
+			
 			$sql = "INSERT INTO {$table} (`". implode('`,`', $keys) ."`) VALUES ({$values})";
 			if (!$this->query($sql, $fields)->error()) {
 				return true;
 				// echo "INSERTed"; // For Debugging
-			}else{
-				// echo "failed"; // For Debugging
 			}
+			// else{
+			// 	// echo "failed"; // For Debugging
+			// }
 		}
 		return false;
 	}
@@ -108,7 +111,6 @@ class DB{
 		}
 	}
 
-
 	public function count(){
 		return $this->_count;
 	}
@@ -124,6 +126,4 @@ class DB{
 	public function error(){
 		return $this->_error;
 	}
-
-
 }
